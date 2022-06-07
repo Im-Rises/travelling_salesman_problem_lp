@@ -18,7 +18,23 @@ another take more or less time than other depending on the distance.
 
 ## Problem modelisation
 
-Below is the problem modelisation in Linear Programming.
+Below is the problem modernisation in Linear Programming.
+
+- Parameters:
+    1. i,j: indices on set V of customers
+    2. $d_{i,j}$: distance between customers i and j
+  
+- Variables: for each $i \ne j \in V, x_{i,j} = 1$ if the salesman travels directly from i to j and 0 otherwise.
+  
+- Objective function:
+ 
+$$min {\sum_{i \ne j \in V}}{d_{ij} x{ij}}$$
+
+- Constraints
+
+  1. (one successor) $$\forall i \in V \sum x_{i,j} = 1$$
+  2. (one predecessor) $$\forall j \in V \sum x_{i \in V,i \ne j} = 1$$
+  3. (subtour elimination) $$\forall S \nsubseteq V {\sum_{i \in S,j \in V \backslash S}}{x_{ij}} \geq 1$$
 
 <p align="center">
     <img src="https://user-images.githubusercontent.com/59691442/169556846-231900f0-2195-478d-be14-0990f52ea1b4.png" alt="tspExampleImage" style="height:400px"/>
@@ -29,7 +45,7 @@ Below is the problem modelisation in Linear Programming.
 You need python3 to start the app. you also need some packages that are listed in the `requirements.txt`.  
 To install them all type the following command :
 
-```terminal
+```bash
 pip install -r requirements.txt
 ```
 
