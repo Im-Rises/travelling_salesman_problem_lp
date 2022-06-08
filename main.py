@@ -74,7 +74,7 @@ def print_solution(u, cities):
     solution = sorted(solution.items())
     print("\nvilles dans l'ordre : ")
     for i in solution:
-        print(f"{cities[i[1]]}->", end="")
+        print(f"{cities[i[1]]} -> ", end="")
     print(cities[solution[0][1]])
 
 
@@ -113,7 +113,7 @@ def main(city_origin_name, filename):
 
     # check problem response
     if status == pywraplp.Solver.OPTIMAL:
-        print(f'Objective value ={str(model.Objective().Value())}')
+        print(f'Objective value = {str(model.Objective().Value())}')
         print_solution(u, name_cities)
     elif status == pywraplp.Solver.INFEASIBLE:
         print("le probleme n'est pas solvable")
