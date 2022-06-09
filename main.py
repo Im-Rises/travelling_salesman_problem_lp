@@ -81,36 +81,33 @@ def print_solution(u, cities):
 def main(city_origin_name, filename, sheet):
     # Load dataset and drop useless/empty rows
     df = pd.read_excel(filename, sheet)
-    df = df.dropna(how="all")
 
-    name_cities = np.array(df.head(1))  # Get cities name
-    name_cities = np.array(name_cities[0])  # Reshape array
-    name_cities = np.delete(name_cities, 0, axis=0)  # Drop nan value
+    # Create dictionaries
+    name_cities = np.array(df.columns.values)
+    name_cities = np.delete(name_cities, 0, axis=0)
+    index_cities = dict(zip(name_cities, range(len(name_cities))))
+    name_cities = dict(zip(range(len(name_cities)), name_cities))
 
-    # Swap city origin tsp to position column 0 of array
-    colList = list(df.columns)
-    colList[1], colList[11] = colList[11], colList[1]
-    df = df[colList]
+    # Convert df to numpy array
+    dima = np.asarray(df)
+    dima = np.delete(dima, 0, axis=1)  # Delete rows' city name
 
-    # Convert to numpy array
-    dima = np.array(df)
+    # Find index of starting city
+    index_city_start = index_cities[city_origin_name]
 
-    # Get index of the city you want to start
-    city_index = -1
-    for i in range(len(dima)):
-        if dima[i][0] == city_origin_name:
-            city_index = i
-    if city_index == -1:
-        print("Error city not found")
-        exit(1)
+    # Swap city origin tsp to row 0 of array
+    dima[(0, index_city_start), :] = dima[(index_city_start, 0), :]
 
-    # Delete cities' name
-    dima = np.delete(dima, 0, axis=1)
-    dima = np.delete(dima, 0, axis=0)
-    city_index -= 1
+    # Swap city origin tsp to column 0 of array
+    dima[:, [0, index_city_start]] = dima[:, [index_city_start, 0]]
+    print(dima)
 
-    # Swap city origin tsp to position row 0 of array
-    dima[[0, city_index]] = dima[[city_index, 0]]  # Distance array
+    # Swap dictionaries indexes and names
+    name_cities[0], name_cities[index_city_start] = name_cities[index_city_start], name_cities[0]
+
+    # Swap dictionaries indexes and names
+    city1,city2 = (name_cities[0],name_cities[index_city_start])
+    index_cities[city1], index_cities[city2] = index_cities[city2], index_cities[city1]
 
     # now solve problem
     u, model, status = solve(dima)
