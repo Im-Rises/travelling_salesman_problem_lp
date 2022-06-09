@@ -17,9 +17,8 @@ class MyTestCase(unittest.TestCase):
         cities = np.array(cities)
         cities = np.delete(cities, 0, axis=0)
         for city in cities:
-            if city != "Perth Stadium" and city != "Marrara Oval":
+            if city not in ["Perth Stadium", "Marrara Oval"]:  # To many calculations so not testing those two
                 self.assertEqual(lpr.main(city, filename, sheet), rs.main(city, filename, sheet))
-                print("Monscript fait")
 
 
 if __name__ == '__main__':
