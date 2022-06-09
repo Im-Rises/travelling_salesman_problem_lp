@@ -78,9 +78,9 @@ def print_solution(u, cities):
     print(cities[solution[0][1]])
 
 
-def main(city_origin_name, filename):
+def main(city_origin_name, filename, sheet):
     # Load dataset and drop useless/empty rows
-    df = pd.read_excel(filename, "sheet1")
+    df = pd.read_excel(filename, sheet)
     df = df.dropna(how="all")
 
     name_cities = np.array(df.head(1))  # Get cities name
@@ -127,4 +127,4 @@ def main(city_origin_name, filename):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    main("Sydney", "data.xlsx")
+    main("Sydney", "data.xlsx", "sheet1")
