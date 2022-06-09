@@ -1,61 +1,64 @@
 import numpy as np
-import pandas as pd
+import common_functions as cf
 from ortools.linear_solver import pywraplp
+
+
+def create_array(city_origin_name, filename, sheet):
+    # Load dataset and drop useless/empty rows
+    return cf.create_and_prepare_csv(city_origin_name, filename, sheet)
 
 
 def solve(distances: np.ndarray):
     """
-    :param distances: la matrice avec toutes les distances
-    :return:  solution X, model, status
+    :param distances: The matrix containing all the distances
+    :return: solution X, model, status
     """
-    # on vérifie que la matrice reçue a bien 2 dimensions et après que
-    # ses 2 dimensions contiennent le même nombre de distances, car on
-    # travaille avec une matrice carrée
+    # We check the matrix is 2 dimensioned and it's 2 dimensions
+    # contains the same numbers of distances (squared matrix)
     if distances.ndim != 2 and distances.shape[0] != distances.shape[1]:
         raise ValueError("Invalid dima dimensions detected. Square matrix expected.")
 
-    # on détermine le nombre de villes et on cree des variables qui vont servir à itérer dessus
-    nombre_de_villes = distances.shape[0]
-    index_villes = range(nombre_de_villes)
-    index_villes_sauf_premiere = range(1, nombre_de_villes)
+    # get the number of cities and we begin iterate
+    number_of_cities = distances.shape[0]
+    index_cities = range(number_of_cities)
+    index_cities_except_first = range(1, number_of_cities)
 
-    # on cree le modele en mode scip
+    # Model creation in SCIP
     model = pywraplp.Solver.CreateSolver('SCIP')
     model.EnableOutput()
 
-    # on génère les variables de decisions sous forme de booleen pour savoir si on passer par cette ville ou pas
+    # Decision variables generation as boolean if we cross the city
     x = {}
-    for i in index_villes:
-        for j in index_villes:
+    for i in index_cities:
+        for j in index_cities:
             x[(i, j)] = model.BoolVar(f"x_i{i}j{j}")
 
-    # on initialise les variables de decision
-    u = {i: model.IntVar(0, nombre_de_villes, f"u_i{i}") for i in index_villes}
+    # Decision variable instantiation
+    u = {i: model.IntVar(0, number_of_cities, f"u_i{i}") for i in index_cities}
 
-    # contrainte : on veut un seul successeur
-    for i in index_villes:
-        model.Add(sum(x[(i, j)] for j in index_villes) == 1)
+    # Constraints : Only one successor
+    for i in index_cities:
+        model.Add(sum(x[(i, j)] for j in index_cities) == 1)
 
-    # contrainte : on veut un seul prédécesseur
-    for j in index_villes:
-        model.Add(sum(x[(i, j)] for i in index_villes) == 1)
+    # Constraints : Only one predecessor
+    for j in index_cities:
+        model.Add(sum(x[(i, j)] for i in index_cities) == 1)
 
-    # ici on vérifie que l'on fait bien une seule fois le tour
-    # contrainte : on commence par la premiere ville
+    # Check if we only do one tour of the cities
+    # Constraints : Begin by the first city
     model.Add(u[0] == 1)
 
-    # on crée un chemin avec toutes les villes, (donc en ne partant pas de la première sinon ça fait doublon et on
-    # ne veut pas)
-    for i in index_villes_sauf_premiere:
+    # We begin the journey through all the cities without beginning by the first one to not count it twice
+    for i in index_cities_except_first:
         model.Add(u[i] >= 2)
-        model.Add(u[i] <= nombre_de_villes)
+        model.Add(u[i] <= number_of_cities)
 
-    for i in index_villes_sauf_premiere:
-        for j in index_villes_sauf_premiere:
-            model.Add(u[i] - u[j] + 1 <= (nombre_de_villes - 1) * (1 - x[(i, j)]))
+    for i in index_cities_except_first:
+        for j in index_cities_except_first:
+            model.Add(u[i] - u[j] + 1 <= (number_of_cities - 1) * (1 - x[(i, j)]))
 
-    # on veut que la distance soir la plus petite possible
-    model.Minimize(sum(x[(i, j)] * distances[(i, j)] for i in index_villes for j in index_villes))
+    # Minimization (the minimum way through all the cities)
+    model.Minimize(sum(x[(i, j)] * distances[(i, j)] for i in index_cities for j in index_cities))
 
     status = model.Solve()
 
@@ -64,8 +67,8 @@ def solve(distances: np.ndarray):
 
 def print_solution(u, cities):
     """
-    :param u: tous les nœuds
-    :param cities: le tableau qu'on a récupéré de toutes les villes
+    :param u: all the nodes
+    :param cities: cities index to name dictionary
     :return: None
     """
     num_nodes = len(u)
@@ -79,35 +82,8 @@ def print_solution(u, cities):
 
 
 def main(city_origin_name, filename, sheet):
-    # Load dataset and drop useless/empty rows
-    df = pd.read_excel(filename, sheet)
-
-    # Create dictionaries
-    name_cities = np.array(df.columns.values)
-    name_cities = np.delete(name_cities, 0, axis=0)
-    index_cities = dict(zip(name_cities, range(len(name_cities))))
-    name_cities = dict(zip(range(len(name_cities)), name_cities))
-
-    # Convert df to numpy array
-    dima = np.asarray(df)
-    dima = np.delete(dima, 0, axis=1)  # Delete rows' city name
-
-    # Find index of starting city
-    index_city_start = index_cities[city_origin_name]
-
-    # Swap city origin tsp to row 0 of array
-    dima[(0, index_city_start), :] = dima[(index_city_start, 0), :]
-
-    # Swap city origin tsp to column 0 of array
-    dima[:, [0, index_city_start]] = dima[:, [index_city_start, 0]]
-    print(dima)
-
-    # Swap dictionaries indexes and names
-    name_cities[0], name_cities[index_city_start] = name_cities[index_city_start], name_cities[0]
-
-    # Swap dictionaries indexes and names
-    city1,city2 = (name_cities[0],name_cities[index_city_start])
-    index_cities[city1], index_cities[city2] = index_cities[city2], index_cities[city1]
+    # Create and update array of distances
+    dima, name_cities, index_cities = create_array(city_origin_name, filename, sheet)
 
     # now solve problem
     u, model, status = solve(dima)
@@ -116,11 +92,13 @@ def main(city_origin_name, filename, sheet):
     if status == pywraplp.Solver.OPTIMAL:
         print(f'Objective value = {str(model.Objective().Value())}')
         print_solution(u, name_cities)
+        return model.Objective().Value()
     elif status == pywraplp.Solver.INFEASIBLE:
         print("le probleme n'est pas solvable")
+        return -1
     else:
         print(f"le probleme n'a pas pu être resolu, le probleme est : {status}")
-
+        return -1
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':

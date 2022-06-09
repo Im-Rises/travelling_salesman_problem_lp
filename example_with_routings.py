@@ -1,21 +1,14 @@
-import numpy as np
-import pandas as pd
+import common_functions as cf
 from ortools.constraint_solver import pywrapcp, routing_enums_pb2
 
 
-def create_data_model(filename):
+def create_data_model(city_origin_name, filename, sheet):
     """Stores the data for the problem."""
-    df = pd.read_excel(filename, "sheet1")
-    df = df.dropna(how="all")
-    # Convert to numpy array
-    dima = np.array(df)
-    dima = np.delete(dima, 0, axis=1)
-    dima = np.delete(dima, 0, axis=0)
-
+    dima, name_cities, index_cities = cf.create_and_prepare_csv(city_origin_name, filename, sheet)
     return {
-        'distance_matrix': dima,
-        'num_vehicles': 1
-    }
+               'distance_matrix': dima,
+               'num_vehicles': 1
+           }, name_cities, index_cities
 
 
 def print_solution(manager, routing, solution, name_cities):
@@ -34,23 +27,10 @@ def print_solution(manager, routing, solution, name_cities):
     plan_output += 'Route distance: {}miles\n'.format(route_distance)
 
 
-def main(city_origin_name, filename):
-    df = pd.read_excel(filename, "sheet1")
-    df = df.dropna(how="all")
-
-    name_cities = np.array(df.head(1))  # Get cities name
-    name_cities = np.array(name_cities[0])  # Reshape array
-    name_cities = np.delete(name_cities, 0, axis=0)  # Drop nan value
-
-    index_cities = {}
-    i = 0
-    for name in name_cities:
-        index_cities[name] = i
-        i += 1
-
+def main(city_origin_name, filename, sheet):
     """Entry point of the program."""
     # Instantiate the data problem.
-    data = create_data_model(filename)
+    data, name_cities, index_cities = create_data_model(city_origin_name, filename, sheet)
 
     # Create the routing index manager.
     manager = pywrapcp.RoutingIndexManager(len(data['distance_matrix']),
@@ -85,4 +65,4 @@ def main(city_origin_name, filename):
 
 
 if __name__ == '__main__':
-    main("Sydney", "data.xlsx")
+    main("Sydney", "data.xlsx", "sheet1")
