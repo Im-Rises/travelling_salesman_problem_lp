@@ -1,5 +1,10 @@
 # travelling_salesman_problem_lp
 
+<p align="center">
+    <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="pythonLogo" style="height:50px"/>
+    <img src="" alt="googleOrtoolsLogo" style="height:50px"/>
+</p>
+
 Travelling salesman problem solver using linear programming with Google Or-Tools.
 
 ## Description
@@ -23,18 +28,18 @@ Below is the problem modernisation in Linear Programming.
 - Parameters:
     1. i,j: indices on set V of customers
     2. $$d_{i,j}$$: distance between customers i and j
-  
+
 - Variables: for each $$i \ne j \in V, x_{i,j} = 1$$ if the salesman travels directly from i to j and 0 otherwise.
-  
+
 - Objective function:
- 
+
 $$min {\sum_{i \ne j \in V}}{d_{ij} x{ij}}$$
 
 - Constraints
 
-  1. (one successor) $$\forall i \in V \sum x_{i,j} = 1$$
-  2. (one predecessor) $$\forall j \in V \sum x_{i \in V,i \ne j} = 1$$
-  3. (subtour elimination) $$\forall S \nsubseteq V {\sum_{i \in S,j \in V \backslash S}}{x_{ij}} \geq 1$$
+    1. (one successor) $$\forall i \in V \sum x_{i,j} = 1$$
+    2. (one predecessor) $$\forall j \in V \sum x_{i \in V,i \ne j} = 1$$
+    3. (subtour elimination) $$\forall S \nsubseteq V {\sum_{i \in S,j \in V \backslash S}}{x_{ij}} \geq 1$$
 
 <!--
 <p align="center">
@@ -53,19 +58,40 @@ pip install -r requirements.txt
 
 You can then start the program by double-clicking the main.py file.
 
-If you want to change the excel file to use or change the city to begin with in your tsp. Just change the last line of the main.py file.
+If you want to change the excel file to use or change the city to begin with in your tsp. Just change the last line of
+the main.py file.
 
-```py
-if __name__ == '__main__':
-    main("Sydney", "data.xlsx")
+```bash
+py main.py <city> <path/to/excel> <sheet_name>
 ```
 
-by
+Example :
 
-```py
-if __name__ == '__main__':
-    main("example_city", "example.xlsx")
+```bash
+py main.py "Sydney" data.xlsx sheet1 
 ```
+
+## Test
+
+To verify if the result of the script is good one, you can start the script `example_with_routings.py`.
+
+### Use the example_with_routings script
+
+It works exactly the same way as the `main.py` script.
+
+```bash
+py example_with_routings.py <city> <path/to/excel> <sheet_name>
+```
+
+Example :
+
+```bash
+py example_with_routings.py "Sydney" data.xlsx sheet1 
+```
+
+### Start Unit Test Python script
+
+Placeholder
 
 ## Program implementation
 
@@ -82,22 +108,23 @@ The excel contains the distances of all cities relativeness from each other.
 
 **CSV Example :**
 
-|  |M.C.G.|Docklands|Adelaide Oval|
+| |M.C.G.|Docklands|Adelaide Oval|
 |--|--|--|--|
-|M.C.G.|  0| 3 |657 |
+|M.C.G.| 0| 3 |657 |
 |Docklands| 3|0 |654 |
 |Adelaide Oval| 657|654|0|
 
-The excel is loaded in our app and it will search the city by the name you set in the variable `city_origin_name`. This name will be used to move the row of the city at the beginning of our project.
+The excel is loaded in our app and it will search the city by the name you set in the variable `city_origin_name`. This
+name will be used to move the row of the city at the beginning of our project.
 
 For example, if you want to begin your travel from Adelaide Oval, the data will look like below :
 
 **CSV Example :**
 
-|  |M.C.G.|Docklands|Adelaide Oval|
+| |M.C.G.|Docklands|Adelaide Oval|
 |--|--|--|--|
 |Adelaide Oval| 657|654|0|
-|M.C.G.|  0| 3 |657 |
+|M.C.G.| 0| 3 |657 |
 |Docklands| 3|0 |654 |
 
 ### Linear Programming
@@ -115,7 +142,8 @@ Sydney->S.C.G.->Carrara->Gabba->Riverway Stadium->Cazaly's Stadium->Marrara Oval
 
 ### Routing implementation
 
-To verify the app output result. We create a file named `example_with_routings.py` that will solve our tsp problem but by using routing.
+To verify the app output result. We create a file named `example_with_routings.py` that will solve our tsp problem but
+by using routing.
 
 Output :
 

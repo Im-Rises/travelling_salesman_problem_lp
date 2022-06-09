@@ -1,5 +1,4 @@
 import sys
-
 import common_functions as cf
 from ortools.constraint_solver import pywrapcp, routing_enums_pb2
 
@@ -71,8 +70,8 @@ def main(city_origin_name, filename, sheet):
 
 if __name__ == '__main__':
     # main("Sydney", "data.xlsx", "sheet1")
-    if len(sys.argv) >= 3:
-        main(sys.argv[0], sys.argv[1], sys.argv[2])
+    if len(sys.argv) > 3:
+        main(sys.argv[1], sys.argv[2], sys.argv[3])
     else:
         print("Not enought argutments:"
               "Usage : example_with_routings.py <city> <path/to/excel> <sheet_name>")
