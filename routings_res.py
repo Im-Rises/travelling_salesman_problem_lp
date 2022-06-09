@@ -74,4 +74,4 @@ if __name__ == '__main__':
         main(sys.argv[1], sys.argv[2], sys.argv[3])
     else:
         print("Not enought argutments:"
-              "Usage : example_with_routings.py <city> <path/to/excel> <sheet_name>")
+              "Usage : routings_res.py <city> <path/to/excel> <sheet_name>")

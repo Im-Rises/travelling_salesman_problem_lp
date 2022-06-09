@@ -1,8 +1,0 @@
-Objective: 11669 miles
-Route for vehicle 0:
-M.C.G. -> Docklands -> Kardinia Park -> Eureka Stadium -> Adelaide Oval -> Perth Stadium -> Traeger Park -> Marrara Oval -> Cazaly's Stadium -> Riverway Stadium -> Gabba -> Carrara -> S.C.G. -> Sydney -> Manuka Oval -> Bellerive Oval -> York Park -> M.C.G.
-
-Objective value = 11669.0
-
-villes dans l'ordre : 
-M.C.G. -> Docklands -> Kardinia Park -> Eureka Stadium -> Adelaide Oval -> Perth Stadium -> Traeger Park -> Marrara Oval -> Cazaly's Stadium -> Riverway Stadium -> Gabba -> Carrara -> S.C.G. -> Sydney -> Manuka Oval -> Bellerive Oval -> York Park -> M.C.G.

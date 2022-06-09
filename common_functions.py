@@ -24,7 +24,6 @@ def create_and_prepare_csv(city_origin_name, filename, sheet):
 
     # Swap city origin tsp to column 0 of array
     dima[:, [0, index_city_start]] = dima[:, [index_city_start, 0]]
-    print(dima)
 
     # Swap dictionaries indexes and names
     name_cities[0], name_cities[index_city_start] = name_cities[index_city_start], name_cities[0]

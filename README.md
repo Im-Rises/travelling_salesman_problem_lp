@@ -47,6 +47,32 @@ $$min {\sum_{i \ne j \in V}}{d_{ij} x{ij}}$$
 </p>
 -->
 
+## Linear Programming
+
+Linear programming implementation is completely set in the solve function.
+
+Below is a part of the function solve :
+
+Output :
+
+```
+villes dans l'ordre : 
+Sydney->S.C.G.->Carrara->Gabba->Riverway Stadium->Cazaly's Stadium->Marrara Oval->Traeger Park->Perth Stadium->Adelaide Oval->Eureka Stadium->Kardinia Park->Bellerive Oval->York Park->Manuka Oval->M.C.G.->Docklands->Sydney
+```
+
+### Routing implementation
+
+To verify the app output result. We create a file named `example_with_routings.py` that will solve our tsp problem but
+by using routing.
+
+Output :
+
+```
+Objective: 11669 miles
+Route for vehicle 0:
+Sydney->S.C.G.->Carrara->Gabba->Riverway Stadium->Cazaly's Stadium->Marrara Oval->Traeger Park->Perth Stadium->Adelaide Oval->Eureka Stadium->Kardinia Park->Bellerive Oval->York Park->Manuka Oval->M.C.G.->Docklands->Sydney
+```
+
 ## Quick start
 
 You need python3 to start the app. you also need some packages that are listed in the `requirements.txt`.  
@@ -56,48 +82,56 @@ To install them all type the following command :
 pip install -r requirements.txt
 ```
 
-You can then start the program by double-clicking the main.py file.
-
-If you want to change the excel file to use or change the city to begin with in your tsp. Just change the last line of
-the main.py file.
+You can then start the program by starting the `linear_prog_res.py` file like below:
 
 ```bash
-py main.py <city> <path/to/excel> <sheet_name>
+py linear_prog_res.py <city> <path/to/excel> <sheet_name>
 ```
 
 Example :
 
 ```bash
-py main.py "Sydney" data.xlsx sheet1 
+py linear_prog_res.py "Sydney" data.xlsx sheet1 
 ```
 
 ## Test
 
 To verify if the result of the script is good one, you can start the script `example_with_routings.py`.
 
-### Use the example_with_routings script
+### Use the routings_res.py script
 
-It works exactly the same way as the `main.py` script.
+This script use routing system to resolve the probelm.
+
+To start it, use it exactly the same way as the `linear_prog_res.py` script.
 
 ```bash
-py example_with_routings.py <city> <path/to/excel> <sheet_name>
+py routings_res.py <city> <path/to/excel> <sheet_name>
 ```
 
 Example :
 
 ```bash
-py example_with_routings.py "Sydney" data.xlsx sheet1 
+py routings_res.py "Sydney" data.xlsx sheet1 
 ```
 
 ### Start Unit Test Python script
 
-Placeholder
+To start the test file just run the following command :
 
+```bash
+py unit_test
+```
+
+An assertion will be returned if any errors happened.
+
+A GitHub actions is set to start the unit test script when pushing to the main branch.
+
+<!--
 ## Program implementation
 
-### Strcuture
+### Structure
 
-The program is made only of one file, the "main.py" file.
+The program is made only of one file, the `linear_prog_res.py` file.
 
 The python file load the dataset and then proceed all the linear programming calculs.
 
@@ -126,49 +160,7 @@ For example, if you want to begin your travel from Adelaide Oval, the data will 
 |Adelaide Oval| 657|654|0|
 |M.C.G.| 0| 3 |657 |
 |Docklands| 3|0 |654 |
-
-### Linear Programming
-
-Linear programming implementation is completely set in the solve function.
-
-Below is a part of the function solve :
-
-Output :
-
-```
-villes dans l'ordre : 
-Sydney->S.C.G.->Carrara->Gabba->Riverway Stadium->Cazaly's Stadium->Marrara Oval->Traeger Park->Perth Stadium->Adelaide Oval->Eureka Stadium->Kardinia Park->Bellerive Oval->York Park->Manuka Oval->M.C.G.->Docklands->Sydney
-```
-
-### Routing implementation
-
-To verify the app output result. We create a file named `example_with_routings.py` that will solve our tsp problem but
-by using routing.
-
-Output :
-
-```
-Objective: 11669 miles
-Route for vehicle 0:
- 0 -> 1 -> 9 -> 12 -> 2 -> 5 -> 13 -> 15 -> 3 -> 16 -> 6 -> 14 -> 7 -> 10 -> 4 -> 8 -> 11 -> 0
-```
-
-## Contributors
-
-Clément Reiffers :
-
-- @clementreiffers
-- <https://github.com/clementreiffers>
-
-Quentin Morel :
-
-- @Im-Rises
-- <https://github.com/Im-Rises>
-
-Adrien Tirlemont :
-
-- @Meatisdelicious
-- <https://github.com/Meatisdelicious>
+-->
 
 ## Documentations and API
 
@@ -180,3 +172,17 @@ TSP solvers Or-Tools :
 
 TSP Linear Programming solver :  
 <https://hal.archives-ouvertes.fr/hal-02947086/document>
+
+## Contributors
+
+Quentin Morel :
+
+- @Im-Rises
+- <https://github.com/Im-Rises>
+
+Clément Reiffers :
+
+- @clementreiffers
+- <https://github.com/clementreiffers>
+
+[![GitHub contributors](https://contrib.rocks/image?repo=im-rises/travelling_salesman_problem_lp)](https://github.com/im-rises/travelling_salesman_problem_lp/graphs/contributors)
