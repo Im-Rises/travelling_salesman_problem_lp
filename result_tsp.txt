@@ -1,0 +1,5 @@
+main.py : 
+Sydney -> S.C.G. -> Carrara -> Gabba -> Riverway Stadium -> Cazaly's Stadium -> Marrara Oval -> Traeger Park -> Perth Stadium -> Adelaide Oval -> Eureka Stadium -> Kardinia Park -> Bellerive Oval -> York Park -> Manuka Oval -> M.C.G. -> Docklands -> Sydney
+
+routing : 
+Sydney -> S.C.G. -> Carrara -> Gabba -> Riverway Stadium -> Cazaly's Stadium -> Marrara Oval -> Traeger Park -> Perth Stadium -> Adelaide Oval -> Eureka Stadium -> Kardinia Park -> Docklands -> M.C.G. -> York Park -> Bellerive Oval -> Manuka Oval -> Sydney

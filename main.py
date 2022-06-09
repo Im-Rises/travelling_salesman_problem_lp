@@ -87,6 +87,11 @@ def main(city_origin_name, filename):
     name_cities = np.array(name_cities[0])  # Reshape array
     name_cities = np.delete(name_cities, 0, axis=0)  # Drop nan value
 
+    # Swap city origin tsp to position column 0 of array
+    colList = list(df.columns)
+    colList[1], colList[11] = colList[11], colList[1]
+    df = df[colList]
+
     # Convert to numpy array
     dima = np.array(df)
 
@@ -106,7 +111,6 @@ def main(city_origin_name, filename):
 
     # Swap city origin tsp to position row 0 of array
     dima[[0, city_index]] = dima[[city_index, 0]]  # Distance array
-    name_cities[[0, city_index]] = name_cities[[city_index, 0]]  # Cities' name array
 
     # now solve problem
     u, model, status = solve(dima)

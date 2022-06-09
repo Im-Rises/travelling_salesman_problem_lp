@@ -25,11 +25,11 @@ def print_solution(manager, routing, solution, name_cities):
     plan_output = 'Route for vehicle 0:\n'
     route_distance = 0
     while not routing.IsEnd(index):
-        plan_output += f' {name_cities[manager.IndexToNode(index)]} -> '
+        plan_output += f'{name_cities[manager.IndexToNode(index)]} -> '
         previous_index = index
         index = solution.Value(routing.NextVar(index))
         route_distance += routing.GetArcCostForVehicle(previous_index, index, 0)
-    plan_output += ' {}\n'.format(name_cities[manager.IndexToNode(index)])
+    plan_output += '{}\n'.format(name_cities[manager.IndexToNode(index)])
     print(plan_output)
     plan_output += 'Route distance: {}miles\n'.format(route_distance)
 
