@@ -1,5 +1,3 @@
-import io
-import sys
 import unittest
 
 import numpy as np
