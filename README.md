@@ -27,9 +27,9 @@ Below is the problem modernisation in Linear Programming.
 
 - Parameters:
     1. i,j: indices on set V of customers
-    2. $$d_{i,j}$$: distance between customers i and j
+    2. $d_{i,j}$: distance between customers i and j
 
-- Variables: for each $$i \ne j \in V, x_{i,j} = 1$$ if the salesman travels directly from i to j and 0 otherwise.
+- Variables: for each $i \ne j \in V, x_{i,j} = 1$ if the salesman travels directly from i to j and 0 otherwise.
 
 - Objective function:
 
