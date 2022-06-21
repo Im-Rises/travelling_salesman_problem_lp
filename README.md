@@ -56,8 +56,9 @@ Below is a part of the function solve :
 Output :
 
 ```
-villes dans l'ordre : 
-Sydney->S.C.G.->Carrara->Gabba->Riverway Stadium->Cazaly's Stadium->Marrara Oval->Traeger Park->Perth Stadium->Adelaide Oval->Eureka Stadium->Kardinia Park->Bellerive Oval->York Park->Manuka Oval->M.C.G.->Docklands->Sydney
+Objective value = 11669 miles
+Route:
+Sydney -> S.C.G. -> Carrara -> Gabba -> Riverway Stadium -> Cazaly's Stadium -> Marrara Oval -> Traeger Park -> Perth Stadium -> Adelaide Oval -> Eureka Stadium -> Kardinia Park -> Docklands -> M.C.G. -> York Park -> Bellerive Oval -> Manuka Oval -> Sydney
 ```
 
 ### Routing implementation
@@ -68,9 +69,9 @@ by using routing.
 Output :
 
 ```
-Objective: 11669 miles
-Route for vehicle 0:
-Sydney->S.C.G.->Carrara->Gabba->Riverway Stadium->Cazaly's Stadium->Marrara Oval->Traeger Park->Perth Stadium->Adelaide Oval->Eureka Stadium->Kardinia Park->Bellerive Oval->York Park->Manuka Oval->M.C.G.->Docklands->Sydney
+Objective value = 11669 miles
+Route:
+Sydney -> S.C.G. -> Carrara -> Gabba -> Riverway Stadium -> Cazaly's Stadium -> Marrara Oval -> Traeger Park -> Perth Stadium -> Adelaide Oval -> Eureka Stadium -> Kardinia Park -> Docklands -> M.C.G. -> York Park -> Bellerive Oval -> Manuka Oval -> Sydney
 ```
 
 ## Quick start

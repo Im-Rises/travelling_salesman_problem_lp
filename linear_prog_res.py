@@ -76,7 +76,7 @@ def print_solution(u, cities):
     all_nodes = range(num_nodes)
     solution = {int(u[i].solution_value()): i for i in all_nodes}
     solution = sorted(solution.items())
-    print("\nvilles dans l'ordre : ")
+    print("Route: ")
     for i in solution:
         print(f"{cities[i[1]]} -> ", end="")
     print(cities[solution[0][1]])
@@ -91,22 +91,21 @@ def main(city_origin_name, filename, sheet):
 
     # check problem response
     if status == pywraplp.Solver.OPTIMAL:
-        print(f'Objective value = {str(model.Objective().Value())}')
+        print(f'\nObjective value = {str(model.Objective().Value())}')
         print_solution(u, name_cities)
         return model.Objective().Value()
     elif status == pywraplp.Solver.INFEASIBLE:
-        print("le probleme n'est pas solvable")
+        print("Not solvable")
         return -1
     else:
-        print(f"le probleme n'a pas pu être resolu, le probleme est : {status}")
+        print(f"The problem cannot be solved due to: {status}")
         return -1
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     # main("Sydney", "data.xlsx", "sheet1")
     if len(sys.argv) > 3:
         main(sys.argv[1], sys.argv[2], sys.argv[3])
     else:
-        print("Not enought argutments:"
+        print("Not enought argutments:\n"
               "Usage : routings_res.py <city> <path/to/excel> <sheet_name>")
