@@ -2,12 +2,12 @@
 
 <p align="center">
     <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="pythonLogo" style="height:50px"/>
-    <img src="" alt="googleOrtoolsLogo" style="height:50px"/>
+    <img src="https://user-images.githubusercontent.com/59691442/174799409-9bd85fe6-b58e-4ba3-a4a4-cdfaaa5b91f0.jpg" alt="googleOrtoolsLogo" style="height:50px"/>
 </p>
 
-Travelling salesman problem solver using linear programming with Google Or-Tools.
-
 ## Description
+
+Travelling salesman problem solver using linear programming with Google Or-Tools.
 
 The Travelling Salesman Problem also known as TSP is an NP-hard problem in combinatorial optimization.  
 Imagine a set of city disposed on a map, you have a set of salesman (population) and they must all go to every city in
