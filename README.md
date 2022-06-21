@@ -23,10 +23,10 @@ another take more or less time than other depending on the distance.
 
 ## Problem modelisation
 
-Below is the problem modernisation in Linear Programming.
+Below is the problem modelisation in Linear Programming.
 
 - Parameters:
-    1. i,j: indices on set V of customers
+    1. $i,j$: indices on set V of customers
     2. $d_{i,j}$: distance between customers i and j
 
 - Variables: for each $i \ne j \in V, x_{i,j} = 1$ if the salesman travels directly from i to j and 0 otherwise.
@@ -134,16 +134,6 @@ The app state is verified with a test script detailed in the sections `Start Uni
 A GitHub actions workflow is set to verify the good behaviour of the script while creating a pull request to the main
 branch.
 
-<!--
-## Program implementation
-
-### Structure
-
-The program is made only of one file, the `linear_prog_res.py` file.
-
-The python file load the dataset and then proceed all the linear programming calculs.
--->
-
 ### Use another excel file
 
 Our project contains an Excel file that is load by our app.
@@ -167,20 +157,19 @@ For example, if you want to begin your travel from Adelaide Oval, the data will 
 
 **CSV internal script modification example :**
 
-|               | Adelaide Oval | Docklands | M.C.G. |
-|---------------|---------------|-----------|--------|
-| Adelaide Oval | 0             | 654       | 657    |
-| Docklands     | 654           | 0         | 3      |
-| M.C.G.        | 657           | 3         | 0      |
-
-will become:
-
 |               | M.C.G. | Docklands | Adelaide Oval |
 |---------------|--------|-----------|---------------|
 | M.C.G.        | 0      | 3         | 657           |
 | Docklands     | 3      | 0         | 654           |
 | Adelaide Oval | 657    | 654       | 0             |
 
+will become:
+
+|               | Adelaide Oval | M.C.G. | Docklands |
+|---------------|---------------|--------|-----------|
+| Adelaide Oval | 0             | 657    | 654       |
+| M.C.G.        | 657           | 0      | 3         |
+| Docklands     | 654           | 3      | 0         |
 
 ## Documentations and API
 
