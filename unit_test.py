@@ -17,6 +17,8 @@ class MyTestCase(unittest.TestCase):
         for city in cities:
             if city not in ["Perth Stadium", "Marrara Oval"]:  # To many calculations so not testing those two
                 self.assertEqual(int(lpr.main(city, filename, sheet)), int(rs.main(city, filename, sheet)))
+                # The two models normally returns floats, the precision can sometimes vary a little. To be
+                # sure the output is the same they are casted into int
 
 
 if __name__ == '__main__':

@@ -51,8 +51,6 @@ $$min {\sum_{i \ne j \in V}}{d_{ij} x{ij}}$$
 
 Linear programming implementation is completely set in the solve function.
 
-Below is a part of the function solve :
-
 Output :
 
 ```
@@ -61,9 +59,10 @@ Route:
 Sydney -> S.C.G. -> Carrara -> Gabba -> Riverway Stadium -> Cazaly's Stadium -> Marrara Oval -> Traeger Park -> Perth Stadium -> Adelaide Oval -> Eureka Stadium -> Kardinia Park -> Docklands -> M.C.G. -> York Park -> Bellerive Oval -> Manuka Oval -> Sydney
 ```
 
-### Routing implementation
+## Routing implementation
 
-To verify the app output result. We create a file named `example_with_routings.py` that will solve our tsp problem but
+To verify the app output result from the linear program. We created a file named `example_with_routings.py` that will
+solve our tsp problem but
 by using routing.
 
 Output :
@@ -75,6 +74,8 @@ Sydney -> S.C.G. -> Carrara -> Gabba -> Riverway Stadium -> Cazaly's Stadium -> 
 ```
 
 ## Quick start
+
+### Use the linear_prog_res.py script
 
 You need python3 to start the app. you also need some packages that are listed in the `requirements.txt`.  
 To install them all type the following command :
@@ -95,13 +96,9 @@ Example :
 py linear_prog_res.py "Sydney" data.xlsx sheet1 
 ```
 
-## Test
-
-To verify if the result of the script is good one, you can start the script `example_with_routings.py`.
-
 ### Use the routings_res.py script
 
-This script use routing system to resolve the probelm.
+This script use routing system to solve the problem.
 
 To start it, use it exactly the same way as the `linear_prog_res.py` script.
 
@@ -112,20 +109,30 @@ py routings_res.py <city> <path/to/excel> <sheet_name>
 Example :
 
 ```bash
-py routings_res.py "Sydney" data.xlsx sheet1 
+py routings_res.py "Sydney" data.xlsx sheet1
 ```
 
-### Start Unit Test Python script
+## Unit test
 
 To start the test file just run the following command :
 
 ```bash
-py unit_test
+py unit_test.py
 ```
 
-An assertion will be returned if any errors happened.
+An assertion will be returned if any difference of output happen between the linear programming script and the routing
+script.
 
-A GitHub actions is set to start the unit test script when pushing to the main branch.
+A GitHub actions is set with the project explained below.
+
+## GitHub actions
+
+[![Python application](https://github.com/Im-Rises/travelling_salesman_problem_lp/actions/workflows/python-app.yml/badge.svg?branch=main)](https://github.com/Im-Rises/travelling_salesman_problem_lp/actions/workflows/python-app.yml)
+
+The app state is verified with a test script detailed in the sections `Start Unit Test Python script`.
+
+A GitHub actions workflow is set to verify the good behaviour of the script while creating a pull request to the main
+branch.
 
 <!--
 ## Program implementation
@@ -135,40 +142,52 @@ A GitHub actions is set to start the unit test script when pushing to the main b
 The program is made only of one file, the `linear_prog_res.py` file.
 
 The python file load the dataset and then proceed all the linear programming calculs.
+-->
 
-### Excel data
+### Use another excel file
 
-Our project contains a excel file that is load by our app.
-The excel contains the distances of all cities relativeness from each other.
+Our project contains an Excel file that is load by our app.
+The Excel contains the distances of all cities relatively from each other.
 
 **CSV Example :**
 
-| |M.C.G.|Docklands|Adelaide Oval|
-|--|--|--|--|
-|M.C.G.| 0| 3 |657 |
-|Docklands| 3|0 |654 |
-|Adelaide Oval| 657|654|0|
+The excel file you load send as a parameter at the script needs to be formed like below:
 
-The excel is loaded in our app and it will search the city by the name you set in the variable `city_origin_name`. This
-name will be used to move the row of the city at the beginning of our project.
+|               | M.C.G. | Docklands | Adelaide Oval |
+|---------------|--------|-----------|---------------|
+| M.C.G.        | 0      | 3         | 657           |
+| Docklands     | 3      | 0         | 654           |
+| Adelaide Oval | 657    | 654       | 0             |
+
+The Excel is loaded in our scripts, it will search the city by the name you set as starting city. The script will
+internally move the row and column of the target city at index [0,0] of the internal array to now to begin with this
+city.
 
 For example, if you want to begin your travel from Adelaide Oval, the data will look like below :
 
-**CSV Example :**
+**CSV internal script modification example :**
 
-| |M.C.G.|Docklands|Adelaide Oval|
-|--|--|--|--|
-|Adelaide Oval| 657|654|0|
-|M.C.G.| 0| 3 |657 |
-|Docklands| 3|0 |654 |
--->
+|               | Adelaide Oval | Docklands | M.C.G. |
+|---------------|---------------|-----------|--------|
+| Adelaide Oval | 0             | 654       | 657    |
+| Docklands     | 654           | 0         | 3      |
+| M.C.G.        | 657           | 3         | 0      |
+
+will become:
+
+|               | M.C.G. | Docklands | Adelaide Oval |
+|---------------|--------|-----------|---------------|
+| M.C.G.        | 0      | 3         | 657           |
+| Docklands     | 3      | 0         | 654           |
+| Adelaide Oval | 657    | 654       | 0             |
+
 
 ## Documentations and API
 
 Google Or-Tools :  
 <https://developers.google.com/optimization/>
 
-TSP solvers Or-Tools :
+TSP solvers Or-Tools :  
 <https://developers.google.com/optimization/routing/tsp>
 
 TSP Linear Programming solver :  
