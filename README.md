@@ -14,11 +14,15 @@ Imagine a set of city disposed on a map, you have a set of salesman (population)
 the least amount of time/distance.  
 The optimization solution is the one where a salesman goes through all the cities with the least distance or/and time.
 
-In the image below you can see a representation of the tsp problem with cities named A, B, C, D. Going from a city to
+In the image below you can see a representation of the tsp problem with cities named A, B, C. Going from a city to
 another take more or less time than other depending on the distance.
 
-<p align="center">
+<!-- <p align="center">
     <img src="https://user-images.githubusercontent.com/59691442/165635831-5bfc72b5-0dd3-4a9f-afb0-b5ffd402ee88.png" alt="tspExampleImage" style="height:400px"/>
+</p> -->
+
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/59691442/175610459-6ff46e53-08f3-45a1-b2c6-3d17761158c7.png" alt="tspExampleImage" style="height:300px"/>
 </p>
 
 ## Problem modelisation
@@ -61,7 +65,7 @@ Sydney -> S.C.G. -> Carrara -> Gabba -> Riverway Stadium -> Cazaly's Stadium -> 
 
 ## Routing implementation
 
-To verify the app output result from the linear program. We created a file named `example_with_routings.py` that will
+To verify the app output result from the linear programming. We created a file named `example_with_routings.py` that will
 solve our tsp problem but
 by using routing.
 
