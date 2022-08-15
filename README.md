@@ -25,9 +25,9 @@ another take more or less time than other depending on the distance.
     <img src="https://user-images.githubusercontent.com/59691442/175610459-6ff46e53-08f3-45a1-b2c6-3d17761158c7.png" alt="tspExampleImage" style="height:300px"/>
 </p>
 
-## Problem modelisation
+## Problem modeling
 
-Below is the problem modelisation in Linear Programming.
+Below is the problem modeling in Linear Programming.
 
 - Parameters:
     1. $i,j$: indices on set V of customers
@@ -43,7 +43,7 @@ $$min {\sum_{i \ne j \in V}}{d_{ij} x{ij}}$$
 
     1. (one successor) $$\forall i \in V \sum x_{i,j} = 1$$
     2. (one predecessor) $$\forall j \in V \sum x_{i \in V,i \ne j} = 1$$
-    3. (subtour elimination) $$\forall S \nsubseteq V {\sum_{i \in S,j \in V \backslash S}}{x_{ij}} \geq 1$$
+    3. (sub-tour elimination) $$\forall S \nsubseteq V {\sum_{i \in S,j \in V \backslash S}}{x_{ij}} \geq 1$$
 
 <!--
 <p align="center">
@@ -138,14 +138,14 @@ The app state is verified with a test script detailed in the sections `Start Uni
 A GitHub actions workflow is set to verify the good behaviour of the script while creating a pull request to the main
 branch.
 
-### Use another excel file
+### Use another Excel file
 
 Our project contains an Excel file that is load by our app.
 The Excel contains the distances of all cities relatively from each other.
 
 **CSV Example :**
 
-The excel file you load send as a parameter at the script needs to be formed like below:
+The Excel file you load send as a parameter at the script needs to be formed like below:
 
 |               | M.C.G. | Docklands | Adelaide Oval |
 |---------------|--------|-----------|---------------|
@@ -154,8 +154,7 @@ The excel file you load send as a parameter at the script needs to be formed lik
 | Adelaide Oval | 657    | 654       | 0             |
 
 The Excel is loaded in our scripts, it will search the city by the name you set as starting city. The script will
-internally move the row and column of the target city at index [0,0] of the internal array to now to begin with this
-city.
+internally move the row and column of the target city at index [0,0] of the internal array to start the travel from this city.
 
 For example, if you want to begin your travel from Adelaide Oval, the data will look like below :
 
