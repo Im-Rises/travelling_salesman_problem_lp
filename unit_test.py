@@ -1,5 +1,6 @@
 import unittest
 
+import math
 import numpy as np
 import pandas as pd
 
@@ -16,9 +17,8 @@ class MyTestCase(unittest.TestCase):
         cities = np.delete(cities, 0, axis=0)
         for city in cities:
             if city not in ["Perth Stadium", "Marrara Oval"]:  # To many calculations so not testing those two
-                self.assertEqual(int(lpr.main(city, filename, sheet)), int(rs.main(city, filename, sheet)))
-                # The two models normally returns floats, the precision can sometimes vary a little. To be
-                # sure the output is the same they are casted into int
+                self.assertTrue(
+                    math.isclose(lpr.main(city, filename, sheet), rs.main(city, filename, sheet), rel_tol=1e-3))
 
 
 if __name__ == '__main__':

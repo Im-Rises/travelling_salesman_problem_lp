@@ -25,7 +25,7 @@ another take more or less time than other depending on the distance.
     <img src="https://user-images.githubusercontent.com/59691442/175610459-6ff46e53-08f3-45a1-b2c6-3d17761158c7.png" alt="tspExampleImage" style="height:300px"/>
 </p>
 
-> *Note*
+> **Note**  
 > We also implemented a version using genetic algorithm:  
 > https://github.com/Im-Rises/travelling-salesman-problem-ga
 
